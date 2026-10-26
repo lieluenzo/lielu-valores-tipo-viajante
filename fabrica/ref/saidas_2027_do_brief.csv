@@ -1,0 +1,92 @@
+id_site,roteiro,saida,dias,selo,terrestre_total,aereo_total,perfis
+798,Tailândia,19/jan/2027,17,,34921,47190,ME
+792,Carnaval em Veneza,03/fev/2027,12,Lançamento,26219,33960,IM
+856,Japão Essencial,03/fev/2027,15,,32249,44324,ME
+859,Aurora Boreal na Noruega,04/fev/2027,14,,51419,60061,ME
+779,Aurora Boreal na Noruega,02/mar/2027,15,,45224,53444,ME
+799,China Exuberante,06/mar/2027,20,,43109,55395,E
+861,Europa do Leste,08/mar/2027,16,,23234,32326,IM
+887,Turquia com Chios e 3 noites na Capadócia,09/mar/2027,16,,19995,29114,IM
+909,China Continental,16/mar/2027,16,,25290,37875,ME
+800,Uma Mistura de China,16/mar/2027,20,Lançamento,36329,50701,ME
+801,Japão das Cerejeiras,20/mar/2027,20,,52830,67739,E
+865,Turquia com Chios e Bodrum,22/mar/2027,14,,20820,29100,IM
+857,Japão das Cerejeiras,24/mar/2027,21,,63030,77969,E
+883,China Novos Encantos e Tesouros (Leshan),25/mar/2027,20,,38429,52184,ME
+860,Japão Essencial em Flor (cerejeiras),30/mar/2027,17,,40996,55214,E
+867,Keukenhof,01/abr/2027,15,Voo direto,26009,35161,IME
+872,Tunísia,02/abr/2027,14,,26144,36794,ME
+873,China Exuberante,04/abr/2027,20,,42286,54630,E
+804,Espanha do Sul,04/abr/2027,15,,23310,31995,M
+877,Europa do Leste,06/abr/2027,16,,27001,36210,IM
+881,6 países,07/abr/2027,17,,28290,37410,IM
+894,Suíça (Glacier Express),07/abr/2027,15,,40229,49214,ME
+886,Espanha do Sul (quem já conhece Barcelona),08/abr/2027,15,,24526,33269,M
+870,Espanha do Sul e Marrocos,08/abr/2027,23,,44686,53896,M
+803,Europa do Leste (Rota Romântica),08/abr/2027,15,,25021,34186,IM
+807,Keukenhof,08/abr/2027,14,Voo direto,28651,38114,IME
+879,Itália Clássica,09/abr/2027,11,,19936,28486,IM
+882,Atenas e Ilhas Gregas,10/abr/2027,12,,28471,37499,M
+891,Turquia com Chios e Bodrum,13/abr/2027,16,,20326,29445,IM
+889,De Veneza a Dubrovnik,14/abr/2027,14,,24569,33494,M
+892,Egito Espetacular,17/abr/2027,14,,27495,36854,ME
+895,Belezas do Sul da Itália,17/abr/2027,12,,22636,31111,M
+875,Keukenhof,18/abr/2027,15,,27329,36346,IME
+884,Encantos da Itália,19/abr/2027,12,,22184,31785,IM
+808,Marrocos,20/abr/2027,10,Voo direto,21271,29954,M
+890,Europa do Leste,21/abr/2027,16,,26041,36314,IM
+869,Europa do Leste: Cidades Imperiais,21/abr/2027,14,,22094,30676,IM
+880,Japão na Primavera (cerejeiras tardias),21/abr/2027,21,,47536,61186,E
+809,Turquia com Chios e 3 noites na Capadócia,21/abr/2027,14,,18494,27855,IM
+868,Europa do Leste: Cidades Imperiais e Alemanha,23/abr/2027,16,,24465,34126,IM
+871,Uma Mistura de China,25/abr/2027,20,Lançamento,38550,51225,ME
+878,Coreia do Sul,26/abr/2027,16,,40816,53220,ME
+898,Espanha do Sul,01/mai/2027,14,,23834,32534,M
+810,De Veneza a Dubrovnik,02/mai/2027,14,,25244,33510,M
+885,Espanha do Sul e Marrocos,02/mai/2027,23,,41535,50821,M
+906,China Exuberante (Flauta de Junco),05/mai/2027,21,,42976,56806,E
+813,Suíça (Glacier Express),05/mai/2027,15,,37920,47294,ME
+811,Europa do Leste,06/mai/2027,16,,24749,33674,IM
+815,Turquia com Chios,07/mai/2027,13,,18029,26986,IM
+929,Encantos da Itália,08/mai/2027,13,,23116,31741,IM
+817,Itália Clássica,08/mai/2027,13,,21331,29956,IM
+812,Portugal com Compostela,08/mai/2027,12,,17896,27209,IM
+816,"Portugal, Espanha, França e Andorra",09/mai/2027,17,Voo direto,30960,40456,M
+846,China Continental,10/mai/2027,16,,30660,43906,ME
+843,Coreia do Sul,10/mai/2027,16,,36824,48420,ME
+901,Europa do Leste: Cidades Imperiais e Alemanha,12/mai/2027,15,,23880,33539,IM
+903,Suíça (Glacier Express),12/mai/2027,15,,36674,46005,ME
+910,Turquia com Chios e 3 noites na Capadócia,12/mai/2027,14,,18494,27345,IM
+904,Atenas e Ilhas Gregas,15/mai/2027,12,,29564,38535,M
+814,Belezas do Sul da Itália,16/mai/2027,13,,23564,32356,M
+928,China Exuberante,19/mai/2027,19,,42000,54060,E
+900,Europa do Leste: Cidades Imperiais,19/mai/2027,14,,23551,33001,IM
+911,Escandinávia,20/mai/2027,19,,49021,57976,ME
+902,6 países,24/mai/2027,17,,31454,40996,IM
+922,Suíça e Itália (Bernina),26/mai/2027,15,,40124,49471,ME
+920,Bulgária e Romênia,28/mai/2027,17,Lançamento,26609,37020,ME
+921,Marrocos,30/mai/2027,10,Voo direto,21029,29791,M
+918,China Exuberante com Chengdu,02/jun/2027,22,,45016,59339,E
+837,Grã-Bretanha,06/jun/2027,17,Voo direto,38521,48915,M
+826,Grã-Bretanha,06/jun/2027,17,Voo direto,40696,51089,M
+912,Europa do Leste,09/jun/2027,15,,25379,33826,IM
+913,Suíça (Glacier Express),09/jun/2027,15,,33900,42600,ME
+825,Europa do Leste: Cidades Imperiais,10/jun/2027,14,,22634,31139,IM
+821,Emirados Árabes,11/jun/2027,13,,20865,30106,ME
+919,Maravilhas do Sul da Itália e Sicília,14/jun/2027,18,,31590,39914,M
+927,"Croácia, Eslovênia e Bósnia",15/jun/2027,13,,25635,33990,M
+924,Turquia com Chios e 3 noites na Capadócia,17/jun/2027,13,,17746,27329,IM
+925,"Itália do Norte: Montanhas, Lagos e Vinícolas",21/jun/2027,11,,21435,30360,IM
+914,Europa do Leste,01/jul/2027,16,Férias de julho,26955,37501,IM
+915,Itália Clássica,05/jul/2027,12,Férias de julho,20490,30314,IM
+916,Turquia com Chios e Bodrum,06/jul/2027,15,Férias de julho,21781,34754,IM
+954,Japão Essencial (verão),12/jul/2027,15,Férias de julho,38640,51706,ME
+931,Escandinávia,19/jul/2027,18,Férias de julho,49695,59161,ME
+945,Europa do Leste: Cidades Imperiais e Alemanha,20/jul/2027,15,Férias de julho,27556,37455,IM
+933,Europa do Leste,01/ago/2027,15,,24779,32535,IM
+936,Suíça (Glacier Express),03/ago/2027,14,,36061,43350,ME
+905,Turquia com Chios,05/ago/2027,11,,15631,23910,IM
+935,Itália Clássica,07/ago/2027,12,,19891,27885,IM
+937,Belezas do Sul da Itália,11/ago/2027,11,,21239,28815,M
+973,Turquia com Chios e 3 noites na Capadócia,20/ago/2027,13,,16951,26386,IM
+930,Europa do Leste: Cidades Imperiais,out/2027,15,,27179,35369,IM

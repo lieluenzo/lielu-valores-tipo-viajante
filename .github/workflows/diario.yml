@@ -30,6 +30,8 @@ jobs:
         run: python3 fabrica/ler_site.py dados/site_hoje.json
       - name: Fazer as imagens (4 preços por saída)
         run: python3 fabrica/fabrica.py dados/site_hoje.json publico
+      - name: Sugestões da página (só saídas que existem no site hoje)
+        run: python3 fabrica/sugestoes.py dados/site_hoje.json publico
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
