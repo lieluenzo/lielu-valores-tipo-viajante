@@ -32,6 +32,9 @@ jobs:
         run: python3 fabrica/fabrica.py dados/site_hoje.json publico
       - name: Sugestões da página (só saídas que existem no site hoje)
         run: python3 fabrica/sugestoes.py dados/site_hoje.json publico
+      - name: Lista do dia do funil Data de Viagem (saidas_dv.json)
+        continue-on-error: true
+        run: python3 fabrica/saidas_dv.py dados/site_hoje.json publico
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -35,7 +35,7 @@ L = []
 for u in urls:
     for d in tentar(gerar.ler_todas, [u], False):
         L.append(dict(slug=d['slug'], url=d.get('url'), nome=d['nome'], data=d['data_curta'], dias=d['dias'],
-                      dias_aereo=d['dias_aereo'] or d['dias'], atualizado=d['atualizado_site'],
+                      dias_aereo=d['dias_aereo'] or d['dias'], dias_terrestre=d.get('dias_terrestre'), id=d.get('id'), atualizado=d['atualizado_site'],
                       terrestre=parse(d['precos'].get(('terrestre', 'Duplo'))),
                       completo=parse(d['precos'].get(('aereo', 'Duplo')))))
 json.dump(L, open(OUT, 'w'), ensure_ascii=False, indent=1)
