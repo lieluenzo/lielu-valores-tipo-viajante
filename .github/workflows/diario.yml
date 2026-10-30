@@ -40,6 +40,7 @@ jobs:
         run: |
           python3 fabrica/saidas_china.py dados/site_hoje.json publico
           python3 fabrica/fabrica_china.py publico/saidas_china.json publico
+          python3 fabrica/fabrica_china_faixas.py publico/saidas_china.json publico
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
