@@ -41,6 +41,16 @@ jobs:
           python3 fabrica/saidas_china.py dados/site_hoje.json publico
           python3 fabrica/fabrica_china.py publico/saidas_china.json publico
           python3 fabrica/fabrica_china_faixas.py publico/saidas_china.json publico
+      - name: Imagens de período do robô do Instagram "Comente 2027" (calendario-2027/*.png)
+        run: |
+          # se falhar, publica as imagens de ontem (o robô aponta para endereço fixo e não pode ficar sem imagem)
+          if ! python3 fabrica/calendario_2027.py dados/site_hoje.json publico; then
+            echo "::warning::calendario_2027 falhou: ficam as imagens de ontem"
+            rm -rf publico/calendario-2027 && mkdir -p publico/calendario-2027
+            for f in jan-mar.png abr-1.png abr-2.png mai-1.png mai-2.png jun.png index.json; do
+              curl -fsS -o "publico/calendario-2027/$f" "https://lieluenzo.github.io/lielu-valores-tipo-viajante/calendario-2027/$f" || true
+            done
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
