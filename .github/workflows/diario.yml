@@ -51,6 +51,16 @@ jobs:
               curl -fsS -o "publico/calendario-2027/$f" "https://lieluenzo.github.io/lielu-valores-tipo-viajante/calendario-2027/$f" || true
             done
           fi
+      - name: Imagens de roteiro do robô do Instagram "Comente LESTE" (europa-do-leste-2027/*.png)
+        run: |
+          # se falhar, publica as imagens de ontem (o robô aponta para endereço fixo e não pode ficar sem imagem)
+          if ! python3 fabrica/europa_leste_2027.py dados/site_hoje.json publico; then
+            echo "::warning::europa_leste_2027 falhou: ficam as imagens de ontem"
+            rm -rf publico/europa-do-leste-2027 && mkdir -p publico/europa-do-leste-2027
+            for f in classico.png imperiais.png imperiais-alemanha.png rota-romantica.png index.json; do
+              curl -fsS -o "publico/europa-do-leste-2027/$f" "https://lieluenzo.github.io/lielu-valores-tipo-viajante/europa-do-leste-2027/$f" || true
+            done
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
