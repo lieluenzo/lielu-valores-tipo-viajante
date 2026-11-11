@@ -1,4 +1,7 @@
 # Fábrica diária: lista da página Tipo de Viajante V2 (publico/sugestoes_v2.json), ao lado da V1 (sugestoes.json).
+# REGRA FINAL (Bruno, 11/11/2026, 18h): igual à V1, mas os cards 1 e 2 (INI/INT) são Europa do Leste: 1 jan–mar/27 e 2 abr–jun/27,
+#   em todos os ramos (na data escolhida ignoram a época, com aviso). Orçamento: os 6 só de jan–jun/27. Cards 3 a 6 da data seguem a época.
+#   Turquia pode aparecer do card 3 em diante (no máximo 1).
 # TV2 (Bruno, 11/11/2026): igual à V1, mas sem Turquia fixa: os cards 1 e 2 de Iniciante/Intermediário são da Europa do Leste
 #   (clássica, Cidades Imperiais, Imperiais e Alemanha, Rota Romântica; a página mostra os países).
 #   Sem data escolhida (por valor e Flexível): card 1 = jan–mar/27, card 2 = abr–jun/27 (a mais barata dentro do pedido; senão a mais perto, com aviso).
@@ -72,30 +75,31 @@ N = 6
 
 TRI = lambda s: 0 if s['mes'] in ((2027, 1), (2027, 2), (2027, 3)) else 1 if s['mes'] in ((2027, 4), (2027, 5), (2027, 6)) else 2
 
-def escolher(perfil, dentro, distancia, preco, aviso_fora, trimestres=False):
+def escolher(perfil, dentro, distancia, preco, aviso_fora, modo):
+    # modo: 'valor' (orçamento), 'data' (época escolhida) ou 'flex' (tenho flexibilidade). Regra final do Bruno, 11/11/2026.
     """6 cards: [Turquia, Europa do Leste] (INI/INT) + roteiros diferentes, do mais barato.
     dentro(s) = cabe no pedido; distancia(s) = quão longe está do pedido (0 = dentro)."""
     pool = [s for s in S if POOL[perfil] in s['perfis']]
+    if modo == 'valor': pool = [s for s in pool if TRI(s) <= 1]     # orçamento: os 6 só de jan–jun/2027
     chave = lambda s: (distancia(s), preco(s), s['mes'])
     cards, usados = [], set()
-    def por(s, fora):
+    def por(s, fora, aviso=None):
         usados.add(s['roteiro'])
         c = {k: s[k] for k in ('id_site', 'roteiro', 'saida', 'dias', 'selo', 'nome_site', 'link')}
         if s['paises']: c['paises'] = s['paises']          # países da página do site (11/11)
         c['fora_do_pedido'] = fora
-        if fora: c['aviso'] = aviso_fora(s)
+        if fora: c['aviso'] = aviso or aviso_fora(s)
         cards.append(c)
     if perfil in ('INI', 'INT'):
-        # TV2: cards 1 e 2 = Europa do Leste (pode ser o mesmo roteiro, com datas diferentes)
+        # TV2: cards 1 e 2 = Europa do Leste, card 1 de jan–mar/27 e card 2 de abr–jun/27, em TODOS os ramos.
+        # Orçamento: a mais barata dentro da faixa (senão a mais perto). Data e flexível: ignoram a época, a mais barata.
         el = [s for s in pool if LESTE(s)]
-        if trimestres:   # 1º: jan–mar primeiro; 2º: abr–jun primeiro
-            ordens = [lambda s: (TRI(s),) + chave(s), lambda s: ({1: 0, 0: 1}.get(TRI(s), 2),) + chave(s)]
-        else:
-            ordens = [chave, chave]
+        base = chave if modo == 'valor' else (lambda s: (preco(s), s['mes']))
+        ordens = [lambda s: (TRI(s),) + base(s), lambda s: ({1: 0, 0: 1}.get(TRI(s), 2),) + base(s)]
         ja = set()
         for ordem in ordens:
             cand = sorted((s for s in el if s['link'] not in ja), key=ordem)
-            if cand: ja.add(cand[0]['link']); por(cand[0], not dentro(cand[0]))
+            if cand: ja.add(cand[0]['link']); por(cand[0], not dentro(cand[0]), None if modo == 'valor' else 'Saída fora do período que você escolheu')
     resto = [s for s in pool if not LESTE(s)] if perfil in ('INI', 'INT') else pool
     for s in sorted([s for s in resto if dentro(s)], key=lambda s: (preco(s), s['mes'])) + \
              sorted([s for s in resto if not dentro(s)], key=chave):
@@ -114,7 +118,7 @@ for per in POOL:
         ramos[f'D-{per}-{cod}'] = {'caminho': 'data', 'perfil': per, 'periodo': NOME_PER[cod],
                                    'cards': escolher(per, ate, dist, lambda s: s['T'],
                                                      lambda s: 'Saída próxima ao período que você escolheu',
-                                                     trimestres=(cod == 'FLEX'))}
+                                                     modo='flex' if cod == 'FLEX' else 'data')}
     for pac, fx in FAIXAS.items():
         for k, (rot, lo, hi) in enumerate(fx, 1):
             dentro = lambda s, pac=pac, lo=lo, hi=hi: lo < s[pac] <= hi
@@ -122,14 +126,14 @@ for per in POOL:
             aviso = lambda s, pac=pac, hi=hi: ('Um pouco acima da faixa que você escolheu' if s[pac] > hi
                                                else 'Um pouco abaixo da faixa que você escolheu')
             ramos[f'V-{per}-{pac}{k}'] = {'caminho': 'valor', 'perfil': per, 'pacote': pac, 'faixa': rot,
-                                          'cards': escolher(per, dentro, dist, lambda s, pac=pac: s[pac], aviso, trimestres=True)}
+                                          'cards': escolher(per, dentro, dist, lambda s, pac=pac: s[pac], aviso, modo='valor')}
 
 assert all(len(r['cards']) == N for r in ramos.values()), [k for k, r in ramos.items() if len(r['cards']) != N]
 assert all(len({c['id_site'] for c in r['cards']}) == N for r in ramos.values()), 'id_site repetido num ramo'
 out = {'versao': 2, 'gerado_em': datetime.date.today().isoformat(),
-       'fonte': f"Tipo de Viajante V2 (Bruno 11/11: Europa do Leste nos cards 1 e 2, jan–mar e abr–jun) + preços do índice {idx['versao']} ({IDX_URL})",
-       'regras': 'V2. Ordem dos cards = ordem de exibição. Iniciante/Intermediário: cards 1 e 2 = Europa do Leste (sem data escolhida: 1 jan–mar/27, '
-                 '2 abr–jun/27; com época: as 2 mais perto da época). Depois os mais baratos, um por roteiro, no máximo 1 Turquia. Experiente igual à V1. '
+       'fonte': f"Tipo de Viajante V2, regra final do Bruno 11/11 (Europa do Leste jan–mar e abr–jun nos cards 1 e 2; orçamento só jan–jun) + preços do índice {idx['versao']} ({IDX_URL})",
+       'regras': 'V2. Ordem dos cards = ordem de exibição. Orçamento: os 6 só de jan–jun/2027, os mais baratos. Iniciante/Intermediário: 1 Europa do Leste de jan–mar/27 e '
+                 '2 Europa do Leste de abr–jun/27 em todos os ramos (na data escolhida, ignoram a época, com aviso). Cards 3 a 6 da data seguem a época; no máximo 1 Turquia. '
                  'Card com fora_do_pedido=true traz o texto em "aviso". "paises" = países da página do site. Só saídas com preço no site hoje.', 'versao_imagens': idx['versao'],
        'faixas': {f'{p}-{per}': [f[0] for f in FAIXAS[p]] for p in FAIXAS for per in POOL},
        'ramos': ramos}
