@@ -19,7 +19,20 @@ f = lambda v: f"{v:,}".replace(',', '.'); e = H.escape
 
 # nome curto = o nome do roteiro no funil; saída nova (fora da lista) usa o nome do site antes do "–"
 CURTO = json.load(open(os.path.join(AQUI, 'nomes_curtos.json')))
-curto = lambda r: CURTO.get(r['slug']) or re.split(r'\s+[–-]\s+', r['nome'])[0]
+import unicodedata
+def paises_de(txt):
+    """'Áustria, Eslováquia, Hungria, Polônia, República Tcheca e Alemanha' → 'Alemanha, Áustria, Eslováquia, Hungria, Polônia e República Tcheca'"""
+    L = []
+    for x in re.split(r',\s*|\s+e\s+', txt or ''):
+        x = x.strip()
+        if x and x not in L: L.append(x)
+    L.sort(key=lambda x: unicodedata.normalize('NFD', x).encode('ascii', 'ignore').decode().lower())
+    return ', '.join(L[:-1]) + ' e ' + L[-1] if len(L) > 1 else (L[0] if L else '')
+def curto(r):
+    n = CURTO.get(r['slug']) or re.split(r'\s+[–-]\s+', r['nome'])[0]
+    # 11/11/2026 (Bruno): a Europa do Leste (clássica, Cidades Imperiais, Rota Romântica) aparece com o nome dos países
+    if n.startswith('Europa do Leste') and paises_de(r.get('pais')): return paises_de(r['pais'])
+    return n
 familia = lambda r: r['slug'].split('-')[0]          # china-..., reino-unido-..., suica-...: um destino por cartão
 
 fixa = lambda r: re.match(r'\d\d/\d\d/\d{4}$', r['data'])
